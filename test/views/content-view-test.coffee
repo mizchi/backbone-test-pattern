@@ -1,4 +1,4 @@
-ContentView = require '../app/views/content-view.coffee'
+ContentView = require '../../app/views/content-view.coffee'
 
 describe 'foo', ->
   it 'should have content foo', ->

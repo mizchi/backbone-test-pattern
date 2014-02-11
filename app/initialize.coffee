@@ -1,2 +1,5 @@
-window.App = {}
-App.foo = module.exports = -> true
+ContentView = require './views/content-view.coffee'
+
+$ ->
+  view = new ContentView model: {content: 'foo'}
+  view.attach('body')

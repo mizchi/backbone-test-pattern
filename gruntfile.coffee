@@ -10,6 +10,7 @@ module.exports = (grunt) ->
         dest: 'public/vendor.js'
         dependencies:
           'chai-jquery': ['jquery','chai']
+          'backbone': ['jquery','lodash']
         bowerOptions:
           relative: false
 
@@ -17,19 +18,19 @@ module.exports = (grunt) ->
       app:
         files:
           'public/all.js': [
-            'app/**/*.coffee'
+            'app/initialize.coffee'
           ]
         options:
-          transform: ['coffeeify']
+          transform: ['coffeeify', 'hbsfy']
 
       test:
         files:
           'test/assets/test.js': [
-            'test/**/*.coffee'
+            'test/initialize.coffee'
           ]
-        options:
 
-          transform: ['coffeeify']
+        options:
+          transform: ['coffeeify', 'hbsfy']
 
     mocha_phantomjs:
       options:
