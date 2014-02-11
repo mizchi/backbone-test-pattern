@@ -6,17 +6,23 @@ module.exports = (grunt) ->
       all:
         dest: 'public/vendor.js'
         dependencies:
-          # 'chai-jquery': 'jquery'
           'chai-jquery': ['jquery','chai']
         bowerOptions:
           relative: false
 
     browserify:
-      dist:
+      app:
         files:
           'public/all.js': [
-            'app/**/*.js',
             'app/**/*.coffee'
+          ]
+        options:
+          transform: ['coffeeify']
+
+      test:
+        files:
+          'test/assets/test.js': [
+            'test/**/*.coffee'
           ]
         options:
           transform: ['coffeeify']
