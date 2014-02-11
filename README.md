@@ -14,18 +14,10 @@ web app skeleton
 npm install
 bower install
 grunt build
-grunt test
 ```
 
-## Tasks
+## Test
 
 ```
-# build app
-grunt build
-
-# run mocha-phantomjs
 grunt test
-
-# server with run test
-grunt server
 ```
