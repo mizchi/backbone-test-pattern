@@ -1,3 +1,3 @@
 describe 'foo', ->
   it 'should return',->
-    expect(true).to.be.true
+    expect(App.foo()).to.be.true
