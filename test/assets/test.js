@@ -556,9 +556,13 @@ module.exports = require('./dist/cjs/handlebars.runtime');
 module.exports = require("handlebars/runtime")["default"];
 
 },{"handlebars/runtime":10}],12:[function(require,module,exports){
+require('./views/content-view-test.coffee');
+
+
+},{"./views/content-view-test.coffee":13}],13:[function(require,module,exports){
 var ContentView;
 
-ContentView = require('../app/views/content-view.coffee');
+ContentView = require('../../app/views/content-view.coffee');
 
 describe('foo', function() {
   return it('should have content foo', function() {
@@ -573,4 +577,4 @@ describe('foo', function() {
 });
 
 
-},{"../app/views/content-view.coffee":3}]},{},[12])
+},{"../../app/views/content-view.coffee":3}]},{},[12])
