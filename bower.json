@@ -1,0 +1,21 @@
+{
+  "name": "clitest",
+  "version": "0.0.0",
+  "authors": [
+    "Koutarou Chikuba <miz404@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "expect": "~0.2.0",
+    "chai": "~1.9.0",
+    "jquery": "~2.1j0",
+    "chai-jquery": "~1.2.1"
+  }
+}
