@@ -652,7 +652,7 @@ describe('Content', function() {
     url: '/content'
   });
   return describe('#fetch', function() {
-    return it('should quest callback ', function(done) {
+    return it('should request to /content', function(done) {
       var content;
       content = new Content;
       return content.fetch().done(function() {
