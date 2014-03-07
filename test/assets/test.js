@@ -10,9 +10,7 @@ module.exports = Content = (function(_super) {
     return Content.__super__.constructor.apply(this, arguments);
   }
 
-  Content.prototype.urlRoot = '/content/';
-
-  Content.prototype.id = '1';
+  Content.prototype.urlRoot = '/content';
 
   return Content;
 
@@ -651,13 +649,13 @@ Content = require('../../app/models/content.coffee');
 
 describe('Content', function() {
   stubRequest({
-    url: "/content/1"
+    url: '/content'
   });
   return describe('#fetch', function() {
     return it('should quest callback ', function(done) {
       var content;
       content = new Content;
-      return $.get('/content/1').done(function() {
+      return content.fetch().done(function() {
         return done();
       });
     });
@@ -752,7 +750,6 @@ describe('ContentView', function() {
     return it('should show content', function() {
       var content;
       content = new ContentView;
-      content.render();
       content.$('.js-show-content').click();
       return expect(content.$('.content').css('display')).eq('block');
     });
