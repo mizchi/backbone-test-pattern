@@ -1,4 +1,25 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var Content,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+module.exports = Content = (function(_super) {
+  __extends(Content, _super);
+
+  function Content() {
+    return Content.__super__.constructor.apply(this, arguments);
+  }
+
+  Content.prototype.urlRoot = '/content/';
+
+  Content.prototype.id = '1';
+
+  return Content;
+
+})(Backbone.Model);
+
+
+},{}],2:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -15,7 +36,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],2:[function(require,module,exports){
+},{"hbsfy/runtime":12}],3:[function(require,module,exports){
 var View,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -54,7 +75,7 @@ module.exports = View = (function(_super) {
 })(Backbone.View);
 
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var ContentView, View, template,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -77,7 +98,7 @@ module.exports = ContentView = (function(_super) {
 })(View);
 
 
-},{"../templates/content.hbs":1,"./base/view.coffee":2}],4:[function(require,module,exports){
+},{"../templates/content.hbs":2,"./base/view.coffee":3}],5:[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var base = require("./handlebars/base");
@@ -110,7 +131,7 @@ var Handlebars = create();
 Handlebars.create = create;
 
 exports["default"] = Handlebars;
-},{"./handlebars/base":5,"./handlebars/exception":6,"./handlebars/runtime":7,"./handlebars/safe-string":8,"./handlebars/utils":9}],5:[function(require,module,exports){
+},{"./handlebars/base":6,"./handlebars/exception":7,"./handlebars/runtime":8,"./handlebars/safe-string":9,"./handlebars/utils":10}],6:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -291,7 +312,7 @@ exports.log = log;var createFrame = function(object) {
   return obj;
 };
 exports.createFrame = createFrame;
-},{"./exception":6,"./utils":9}],6:[function(require,module,exports){
+},{"./exception":7,"./utils":10}],7:[function(require,module,exports){
 "use strict";
 
 var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -320,7 +341,7 @@ function Exception(message, node) {
 Exception.prototype = new Error();
 
 exports["default"] = Exception;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -458,7 +479,7 @@ exports.program = program;function invokePartial(partial, name, context, helpers
 exports.invokePartial = invokePartial;function noop() { return ""; }
 
 exports.noop = noop;
-},{"./base":5,"./exception":6,"./utils":9}],8:[function(require,module,exports){
+},{"./base":6,"./exception":7,"./utils":10}],9:[function(require,module,exports){
 "use strict";
 // Build out our basic SafeString type
 function SafeString(string) {
@@ -470,7 +491,7 @@ SafeString.prototype.toString = function() {
 };
 
 exports["default"] = SafeString;
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 /*jshint -W004 */
 var SafeString = require("./safe-string")["default"];
@@ -547,25 +568,157 @@ exports.escapeExpression = escapeExpression;function isEmpty(value) {
 }
 
 exports.isEmpty = isEmpty;
-},{"./safe-string":8}],10:[function(require,module,exports){
+},{"./safe-string":9}],11:[function(require,module,exports){
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
 module.exports = require('./dist/cjs/handlebars.runtime');
 
-},{"./dist/cjs/handlebars.runtime":4}],11:[function(require,module,exports){
+},{"./dist/cjs/handlebars.runtime":5}],12:[function(require,module,exports){
 module.exports = require("handlebars/runtime")["default"];
 
-},{"handlebars/runtime":10}],12:[function(require,module,exports){
+},{"handlebars/runtime":11}],13:[function(require,module,exports){
+window.stubRequest = function(_arg) {
+  var method, response, status, url;
+  url = _arg.url, method = _arg.method, status = _arg.status, response = _arg.response;
+  beforeEach(function() {
+    if (!url) {
+      throw 'url is required';
+    }
+    if (method == null) {
+      method = 'GET';
+    }
+    if (status == null) {
+      status = 200;
+    }
+    if (response == null) {
+      response = {};
+    }
+    if (!this._server) {
+      this._server = sinon.fakeServer.create();
+      this._server.autoRespond = true;
+    }
+    return this._server.respondWith(method, url, [
+      status, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response)
+    ]);
+  });
+  return {
+    afterEach: function() {
+      var _ref;
+      if ((_ref = this._server) != null) {
+        if (typeof _ref.restore === "function") {
+          _ref.restore();
+        }
+      }
+      return delete this._server;
+    }
+  };
+};
+
+
+},{}],14:[function(require,module,exports){
+require('./helpers.coffee');
+
+require('./views/base/view-test.coffee');
+
 require('./views/content-view-test.coffee');
 
+require('./models/content-test.coffee');
 
-},{"./views/content-view-test.coffee":13}],13:[function(require,module,exports){
+
+},{"./helpers.coffee":13,"./models/content-test.coffee":15,"./views/base/view-test.coffee":17,"./views/content-view-test.coffee":18}],15:[function(require,module,exports){
+var Content;
+
+Content = require('../../app/models/content.coffee');
+
+describe('Content', function() {
+  stubRequest({
+    url: "/content/1"
+  });
+  return describe('#fetch', function() {
+    return it('should quest callback ', function(done) {
+      var content;
+      content = new Content;
+      return $.get('/content/1').done(function() {
+        return done();
+      });
+    });
+  });
+});
+
+
+},{"../../app/models/content.coffee":1}],16:[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var Handlebars = require('hbsfy/runtime');
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div id=\"x\">";
+  if (helper = helpers.x) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.x); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</div>";
+  return buffer;
+  });
+
+},{"hbsfy/runtime":12}],17:[function(require,module,exports){
+var View, template,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+View = require('../../../app/views/base/view.coffee');
+
+template = require('./template.hbs');
+
+describe('View', function() {
+  describe('#constructor', function() {
+    var XView;
+    XView = (function(_super) {
+      __extends(XView, _super);
+
+      function XView() {
+        return XView.__super__.constructor.apply(this, arguments);
+      }
+
+      XView.prototype.template = template;
+
+      return XView;
+
+    })(View);
+    return it('should render by handlebars with model properties', function() {
+      var xview;
+      xview = new XView({
+        model: {
+          x: 'foo'
+        }
+      });
+      xview.render();
+      return expect(xview.$el.html()).eq('<div id="x">foo</div>');
+    });
+  });
+  return describe('#attach', function() {
+    return it('should append itself to jQuery element', function() {
+      var $parent, view;
+      $parent = $('<div>');
+      view = new View;
+      view.attach($parent);
+      return expect($parent).to.not.have.html('');
+    });
+  });
+});
+
+
+},{"../../../app/views/base/view.coffee":3,"./template.hbs":16}],18:[function(require,module,exports){
 var ContentView;
 
 ContentView = require('../../app/views/content-view.coffee');
 
-describe('foo', function() {
-  return it('should have content foo', function() {
+describe('ContentView', function() {
+  return it('should request content foo', function() {
     var contentView;
     contentView = new ContentView({
       model: {
@@ -577,4 +730,4 @@ describe('foo', function() {
 });
 
 
-},{"../../app/views/content-view.coffee":3}]},{},[12])
+},{"../../app/views/content-view.coffee":4}]},{},[14])
