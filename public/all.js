@@ -23,7 +23,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<h1>App</h1>\n\n\n <p class=\"content\">";
+  buffer += "<h1>App</h1>\n\n<button class='js-hide-content'>hide</button>\n<button class='js-show-content'>hide</button>\n<button class='js-save-content'>hide</button>\n<p class=\"content\">";
   if (helper = helpers.content) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.content); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -87,6 +87,23 @@ module.exports = ContentView = (function(_super) {
   }
 
   ContentView.prototype.template = template;
+
+  ContentView.prototype.events = {
+    '.js-show-content': 'showContent',
+    '.js-hide-content': 'hideContent'
+  };
+
+  ContentView.prototype.showContent = function() {
+    return this.$('.content').show();
+  };
+
+  ContentView.prototype.hideContent = function() {
+    return this.$('.content').hide();
+  };
+
+  ContentView.prototype.saveContent = function() {
+    return localStorage.setItem('content', this.model.get('content'));
+  };
 
   return ContentView;
 

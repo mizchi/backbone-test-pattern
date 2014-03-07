@@ -28,7 +28,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<h1>App</h1>\n\n\n <p class=\"content\">";
+  buffer += "<h1>App</h1>\n\n<button class='js-hide-content'>hide</button>\n<button class='js-show-content'>hide</button>\n<button class='js-save-content'>hide</button>\n<p class=\"content\">";
   if (helper = helpers.content) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.content); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -92,6 +92,23 @@ module.exports = ContentView = (function(_super) {
   }
 
   ContentView.prototype.template = template;
+
+  ContentView.prototype.events = {
+    '.js-show-content': 'showContent',
+    '.js-hide-content': 'hideContent'
+  };
+
+  ContentView.prototype.showContent = function() {
+    return this.$('.content').show();
+  };
+
+  ContentView.prototype.hideContent = function() {
+    return this.$('.content').hide();
+  };
+
+  ContentView.prototype.saveContent = function() {
+    return localStorage.setItem('content', this.model.get('content'));
+  };
 
   return ContentView;
 
@@ -689,24 +706,28 @@ describe('View', function() {
       return XView;
 
     })(View);
-    return it('should render by handlebars with model properties', function() {
-      var xview;
-      xview = new XView({
-        model: {
+    return context('with model property x is foo', function() {
+      beforeEach(function() {
+        return this.object = {
           x: 'foo'
-        }
+        };
       });
-      xview.render();
-      return expect(xview.$el.html()).eq('<div id="x">foo</div>');
+      return it('should render by handlebars with model properties', function() {
+        var xview;
+        xview = new XView({
+          model: this.object
+        });
+        return expect(xview.$el.html()).eq('<div id="x">foo</div>');
+      });
     });
   });
   return describe('#attach', function() {
     return it('should append itself to jQuery element', function() {
-      var $parent, view;
-      $parent = $('<div>');
+      var $sandbox, view;
+      $sandbox = $('<div>');
       view = new View;
-      view.attach($parent);
-      return expect($parent).to.not.have.html('');
+      view.attach($sandbox);
+      return expect($sandbox).to.not.have.html('');
     });
   });
 });
@@ -718,7 +739,7 @@ var ContentView;
 ContentView = require('../../app/views/content-view.coffee');
 
 describe('ContentView', function() {
-  return it('should request content foo', function() {
+  it('should request content foo', function() {
     var contentView;
     contentView = new ContentView({
       model: {
@@ -726,6 +747,41 @@ describe('ContentView', function() {
       }
     });
     return expect(contentView.$('.content')).to.have.text('foo');
+  });
+  describe('#showContent', function() {
+    return it('should show content', function() {
+      var content;
+      content = new ContentView;
+      content.showContent();
+      return expect(content.$('.content').css('display')).eq('block');
+    });
+  });
+  describe('#hideContent', function() {
+    return it('should hide content', function() {
+      var content;
+      content = new ContentView;
+      content.hideContent();
+      return expect(content.$('.content').css('display')).eq('none');
+    });
+  });
+  return describe('#saveContent', function() {
+    beforeEach(function() {
+      return this.setItemSpy = sinon.stub(localStorage, 'setItem');
+    });
+    afterEach(function() {
+      return this.setItemSpy.restore();
+    });
+    return it('should save to localStorage', function() {
+      var content;
+      content = new ContentView({
+        model: {
+          content: 'tosave'
+        }
+      });
+      content.saveContent();
+      console.log(this.setItemSpy);
+      return expect(this.setItemSpy.calledWith(sinon.match.string)).to.be["true"];
+    });
   });
 });
 
