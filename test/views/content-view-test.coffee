@@ -9,13 +9,13 @@ describe 'ContentView', ->
   describe '#showContent', ->
     it 'should show content', ->
       content = new ContentView
-      content.showContent()
+      content.$('.js-show-content').click()
       expect(content.$('.content').css('display')).eq 'block'
 
   describe '#hideContent', ->
     it 'should hide content', ->
       content = new ContentView
-      content.hideContent()
+      content.$('.js-hide-content').click()
       expect(content.$('.content').css('display')).eq 'none'
 
   describe '#saveContent', ->

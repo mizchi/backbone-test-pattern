@@ -89,8 +89,8 @@ module.exports = ContentView = (function(_super) {
   ContentView.prototype.template = template;
 
   ContentView.prototype.events = {
-    '.js-show-content': 'showContent',
-    '.js-hide-content': 'hideContent'
+    'click .js-show-content': 'showContent',
+    'click .js-hide-content': 'hideContent'
   };
 
   ContentView.prototype.showContent = function() {

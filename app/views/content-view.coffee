@@ -4,8 +4,8 @@ template = require '../templates/content.hbs'
 module.exports = class ContentView extends View
   template: template
   events:
-    '.js-show-content': 'showContent'
-    '.js-hide-content': 'hideContent'
+    'click .js-show-content': 'showContent'
+    'click .js-hide-content': 'hideContent'
 
   showContent: ->
     @$('.content').show()

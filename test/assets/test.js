@@ -94,8 +94,8 @@ module.exports = ContentView = (function(_super) {
   ContentView.prototype.template = template;
 
   ContentView.prototype.events = {
-    '.js-show-content': 'showContent',
-    '.js-hide-content': 'hideContent'
+    'click .js-show-content': 'showContent',
+    'click .js-hide-content': 'hideContent'
   };
 
   ContentView.prototype.showContent = function() {
@@ -752,7 +752,8 @@ describe('ContentView', function() {
     return it('should show content', function() {
       var content;
       content = new ContentView;
-      content.showContent();
+      content.render();
+      content.$('.js-show-content').click();
       return expect(content.$('.content').css('display')).eq('block');
     });
   });
@@ -760,7 +761,7 @@ describe('ContentView', function() {
     return it('should hide content', function() {
       var content;
       content = new ContentView;
-      content.hideContent();
+      content.$('.js-hide-content').click();
       return expect(content.$('.content').css('display')).eq('none');
     });
   });
@@ -771,7 +772,7 @@ describe('ContentView', function() {
     afterEach(function() {
       return this.setItemSpy.restore();
     });
-    return it('should save to localStorage', function() {
+    return it('should save content to localStorage', function() {
       var content;
       content = new ContentView({
         model: {
@@ -779,7 +780,6 @@ describe('ContentView', function() {
         }
       });
       content.saveContent();
-      console.log(this.setItemSpy);
       return expect(this.setItemSpy.calledWith(sinon.match.string)).to.be["true"];
     });
   });
